@@ -1,7 +1,4 @@
-import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Button from 'react-bootstrap/Button';
+import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 
 import logo from '../img/logo.png';
 
@@ -21,7 +18,7 @@ function HNavbar() {
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
+                        <Nav className="me-auto my-2 my-lg-0">
                             <Nav.Link href="#home">Home</Nav.Link>
                             <Nav.Link href="#history">History</Nav.Link>
                         </Nav>
