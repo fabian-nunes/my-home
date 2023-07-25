@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 
-import logo from './img/logo.png';
+import logo from '../img/logo.png';
 
 function HNavbar() {
     return (
