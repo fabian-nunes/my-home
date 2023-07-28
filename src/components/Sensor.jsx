@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
 import temp from "../img/temperature-high.png";
 import humidity from "../img/humidity-high.png";
+import scale from "../img/scale.png";
 
 class Sensor extends Component {
     constructor(props) {
@@ -18,19 +19,23 @@ class Sensor extends Component {
             <>
                 <Card className="text-center">
                     {this.props.name === "Temperature" ? (
-                        <Card.Header className="fw-bold" style={{backgroundColor: '#93baff'}}>{this.props.name}: {this.state.value}</Card.Header>
+                        <Card.Header className="fw-bold" style={{backgroundColor: '#A1CCD1'}}>{this.props.name}: {this.state.value}</Card.Header>
+                    ) : this.props.name === "Humidity" ? (
+                        <Card.Header className="fw-bold" style={{backgroundColor: '#F4F2DE'}}>{this.props.name}: {this.state.value}</Card.Header>
                     ) : (
-                        <Card.Header className="fw-bold" style={{backgroundColor: '#ffbf6c'}}>{this.props.name}: {this.state.value}</Card.Header>
+                        <Card.Header className="fw-bold" style={{backgroundColor: '#E9B384'}}>{this.props.name}: {this.state.value}</Card.Header>
                     )}
                     <Card.Body>
                         {this.props.name === "Temperature" ? (
                             <img src={temp} alt="temperature" />
-                        ) : (
+                        ) : this.props.name === "Humidity" ? (
                             <img src={humidity} alt="humidity" />
+                        ) : (
+                            <img src={scale} alt="scale"/>
                         )}
                     </Card.Body>
                     <Card.Footer>
-                        <p className="m-0"><b>Update:</b> {this.state.time}</p>
+                        <p className="m-0"><b>Update:</b> {this.state.time} - <a href="#">History</a></p>
                     </Card.Footer>
                 </Card>
             </>
@@ -39,8 +44,14 @@ class Sensor extends Component {
 
     componentDidMount() {
         this.interval = setInterval(() => {
-            fetch("http://localhost:5000/api/sensor/data?name="+this.props.name)
-                .then(res => res.json())
+            fetch("http://localhost:5000/api/"+this.props.type+"/data?name="+this.props.name)
+                .then(function (response) {
+                    if (response.status !== 200) {
+                        console.log("Error: " + response.status);
+                        return;
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     let dateO = new Date(data.createdAt);
                     let dateT = dateO.toLocaleTimeString();
@@ -51,6 +62,9 @@ class Sensor extends Component {
                         //convert to local time
                         time: dateL,
                     });
+                })
+                .catch(function (err) {
+                    console.log(err);
                 });
         }, 1000);
     }

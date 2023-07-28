@@ -6,11 +6,14 @@ const SensorBanner = () => {
         <>
             <Container className="mt-4">
                 <Row>
-                    <Col sm={6}>
-                        <Sensor name="Temperature" />
+                    <Col sm={4}>
+                        <Sensor name="Temperature" type="sensor" />
                     </Col>
-                    <Col sm={6}>
-                        <Sensor name="Humidity" />
+                    <Col sm={4}>
+                        <Sensor name="Humidity" type="sensor" />
+                    </Col>
+                    <Col sm={4}>
+                        <Sensor name="Scale" type="scale" />
                     </Col>
                 </Row>
             </Container>

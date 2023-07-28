@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HNavbar from "./components/Navbar";
 import Banner from "./components/Banner";
 import SensorBanner from "./components/SensorBanner";
+import UploadButton from "./components/UploadButton";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
         <HNavbar />
         <Banner />
         <SensorBanner />
+        <UploadButton />
     </div>
   );
 }
