@@ -31,7 +31,7 @@ class Sensor extends Component {
                 let dateT = dateO.toLocaleTimeString();
                 let dateD = dateO.toLocaleDateString();
                 let dateL = dateD + ' ' + dateT;
-                this.props.updateSensorData(name, data.value, dateL);
+                this.props.updateSensorData(name, data.value, dateL, data.alert);
             })
             .catch((err) => {
                 console.log(err);
