@@ -19,11 +19,11 @@ class Sensor extends Component {
             <>
                 <Card className="text-center">
                     {this.props.name === "Temperature" ? (
-                        <Card.Header className="fw-bold" style={{backgroundColor: '#A1CCD1'}}>{this.props.name}: {this.state.value}</Card.Header>
+                        <Card.Header className="fw-bold" style={{backgroundColor: '#A1CCD1'}}>{this.props.name}: {this.state.value} ºC</Card.Header>
                     ) : this.props.name === "Humidity" ? (
-                        <Card.Header className="fw-bold" style={{backgroundColor: '#F4F2DE'}}>{this.props.name}: {this.state.value}</Card.Header>
+                        <Card.Header className="fw-bold" style={{backgroundColor: '#F4F2DE'}}>{this.props.name}: {this.state.value} %</Card.Header>
                     ) : (
-                        <Card.Header className="fw-bold" style={{backgroundColor: '#E9B384'}}>{this.props.name}: {this.state.value}</Card.Header>
+                        <Card.Header className="fw-bold" style={{backgroundColor: '#E9B384'}}>{this.props.name}: {this.state.value} Kg</Card.Header>
                     )}
                     <Card.Body>
                         {this.props.name === "Temperature" ? (
@@ -43,31 +43,34 @@ class Sensor extends Component {
     }
 
     componentDidMount() {
-        this.interval = setInterval(() => {
-            fetch("http://localhost:5000/api/"+this.props.type+"/data?name="+this.props.name)
-                .then(function (response) {
-                    if (response.status !== 200) {
-                        console.log("Error: " + response.status);
-                        return;
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    let dateO = new Date(data.createdAt);
-                    let dateT = dateO.toLocaleTimeString();
-                    let dateD = dateO.toLocaleDateString();
-                    let dateL = dateD + " " + dateT;
-                    this.setState({
-                        value: data.value,
-                        //convert to local time
-                        time: dateL,
-                    });
-                })
-                .catch(function (err) {
-                    console.log(err);
-                });
-        }, 1000);
+        this.fetchData(); // Call the function when the component is first mounted
+        this.interval = setInterval(this.fetchData, 60000); // Set up the interval to call the function every 60 seconds
     }
+
+    fetchData = () => {
+        fetch("http://localhost:5000/api/" + this.props.type + "/data?name=" + this.props.name)
+            .then((response) => {
+                if (response.status !== 200) {
+                    console.log("Error: " + response.status);
+                    return;
+                }
+                return response.json();
+            })
+            .then((data) => {
+                let dateO = new Date(data.createdAt);
+                let dateT = dateO.toLocaleTimeString();
+                let dateD = dateO.toLocaleDateString();
+                let dateL = dateD + " " + dateT;
+                this.setState({
+                    value: data.value,
+                    //convert to local time
+                    time: dateL,
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     componentWillUnmount() {
         clearInterval(this.interval);
