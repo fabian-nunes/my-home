@@ -63,7 +63,7 @@ const UploadButton = () => {
 
     return (
         <>
-            <Container className="mt-4">
+            <Container className="mt-5 mb-5">
                 <Button variant="primary" size="lg" onClick={handleShow} block>
                     Upload Scale Data
                 </Button>

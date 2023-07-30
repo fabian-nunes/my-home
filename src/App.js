@@ -4,6 +4,7 @@ import HNavbar from "./components/Navbar";
 import Banner from "./components/Banner";
 import SensorBanner from "./components/SensorBanner";
 import UploadButton from "./components/UploadButton";
+import TableComponent from "./components/Table";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Banner />
         <SensorBanner />
         <UploadButton />
+        <TableComponent />
     </div>
   );
 }

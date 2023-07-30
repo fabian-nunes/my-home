@@ -1,57 +1,27 @@
-import React, { Component } from "react";
-import Card from "react-bootstrap/Card";
-import temp from "../img/temperature-high.png";
-import humidity from "../img/humidity-high.png";
-import scale from "../img/scale.png";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Card from 'react-bootstrap/Card';
+import temp from '../img/temperature-high.png';
+import humidity from '../img/humidity-high.png';
+import scale from '../img/scale.png';
+import { updateSensorData } from '../actions';
 
 class Sensor extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: this.props.name,
-            value: 0,
-            time: new Date().toLocaleTimeString(),
-        }
-    }
-
-    render() {
-        return (
-            <>
-                <Card className="text-center">
-                    {this.props.name === "Temperature" ? (
-                        <Card.Header className="fw-bold" style={{backgroundColor: '#A1CCD1'}}>{this.props.name}: {this.state.value} ºC</Card.Header>
-                    ) : this.props.name === "Humidity" ? (
-                        <Card.Header className="fw-bold" style={{backgroundColor: '#F4F2DE'}}>{this.props.name}: {this.state.value} %</Card.Header>
-                    ) : (
-                        <Card.Header className="fw-bold" style={{backgroundColor: '#E9B384'}}>{this.props.name}: {this.state.value} Kg</Card.Header>
-                    )}
-                    <Card.Body>
-                        {this.props.name === "Temperature" ? (
-                            <img src={temp} alt="temperature" />
-                        ) : this.props.name === "Humidity" ? (
-                            <img src={humidity} alt="humidity" />
-                        ) : (
-                            <img src={scale} alt="scale"/>
-                        )}
-                    </Card.Body>
-                    <Card.Footer>
-                        <p className="m-0"><b>Update:</b> {this.state.time} - <a href="#">History</a></p>
-                    </Card.Footer>
-                </Card>
-            </>
-        );
-    }
-
     componentDidMount() {
-        this.fetchData(); // Call the function when the component is first mounted
-        this.interval = setInterval(this.fetchData, 60000); // Set up the interval to call the function every 60 seconds
+        this.fetchData();
+        this.interval = setInterval(this.fetchData, 60000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     fetchData = () => {
-        fetch("http://localhost:5000/api/" + this.props.type + "/data?name=" + this.props.name)
+        const { name, type } = this.props;
+        fetch(`http://localhost:5000/api/${type}/data?name=${name}`)
             .then((response) => {
                 if (response.status !== 200) {
-                    console.log("Error: " + response.status);
+                    console.log('Error: ' + response.status);
                     return;
                 }
                 return response.json();
@@ -60,21 +30,58 @@ class Sensor extends Component {
                 let dateO = new Date(data.createdAt);
                 let dateT = dateO.toLocaleTimeString();
                 let dateD = dateO.toLocaleDateString();
-                let dateL = dateD + " " + dateT;
-                this.setState({
-                    value: data.value,
-                    //convert to local time
-                    time: dateL,
-                });
+                let dateL = dateD + ' ' + dateT;
+                this.props.updateSensorData(name, data.value, dateL);
             })
             .catch((err) => {
                 console.log(err);
             });
     };
 
-    componentWillUnmount() {
-        clearInterval(this.interval);
+    render() {
+        const { name, value, time } = this.props;
+        return (
+            <>
+                <Card className="text-center">
+                    {name === 'Temperature' ? (
+                        <Card.Header className="fw-bold" style={{ backgroundColor: '#A1CCD1' }}>
+                            {name}: {value} ºC
+                        </Card.Header>
+                    ) : name === 'Humidity' ? (
+                        <Card.Header className="fw-bold" style={{ backgroundColor: '#F4F2DE' }}>
+                            {name}: {value} %
+                        </Card.Header>
+                    ) : (
+                        <Card.Header className="fw-bold" style={{ backgroundColor: '#E9B384' }}>
+                            {name}: {value} Kg
+                        </Card.Header>
+                    )}
+                    <Card.Body>
+                        {name === 'Temperature' ? (
+                            <img src={temp} alt="temperature" />
+                        ) : name === 'Humidity' ? (
+                            <img src={humidity} alt="humidity" />
+                        ) : (
+                            <img src={scale} alt="scale" />
+                        )}
+                    </Card.Body>
+                    <Card.Footer>
+                        <p className="m-0">
+                            <b>Update:</b> {time} - <a href="#">History</a>
+                        </p>
+                    </Card.Footer>
+                </Card>
+            </>
+        );
     }
 }
 
-export default Sensor;
+const mapStateToProps = (state, ownProps) => ({
+    ...state.sensors[ownProps.name],
+});
+
+const mapDispatchToProps = {
+    updateSensorData,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sensor);
