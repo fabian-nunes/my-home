@@ -27,13 +27,13 @@ const SensorTable = ({ sensors }) => {
                                     <td>{sensor.value}</td>
                                     <td>{sensor.time}</td>
                                     <td>
-                                        {sensor.alert == 'High' ? (
+                                        {sensor.alert === 'High' ? (
                                             <span className="badge rounded-pill text-bg-danger">{sensor.alert}</span>
-                                        ) : sensor.alert == 'Overweight' ? (
+                                        ) : sensor.alert === 'Overweight' ? (
                                             <span className="badge rounded-pill text-bg-danger">{sensor.alert}</span>
-                                        ) : sensor.alert == 'Low' ? (
+                                        ) : sensor.alert === 'Low' ? (
                                             <span className="badge rounded-pill text-bg-primary">{sensor.alert}</span>
-                                        ) : sensor.alert == 'Underweight' ? (
+                                        ) : sensor.alert === 'Underweight' ? (
                                             <span className="badge rounded-pill text-bg-primary">{sensor.alert}</span>
                                         ) : (
                                             <span className="badge rounded-pill text-bg-success">{sensor.alert}</span>

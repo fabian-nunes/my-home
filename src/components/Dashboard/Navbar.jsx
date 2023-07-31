@@ -1,6 +1,6 @@
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 
-import logo from '../img/logo.png';
+import logo from '../../img/logo.png';
 
 function HNavbar() {
     return (

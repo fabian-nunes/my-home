@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Card from 'react-bootstrap/Card';
-import temp from '../img/temperature-high.png';
-import humidity from '../img/humidity-high.png';
-import scale from '../img/scale.png';
-import { updateSensorData } from '../actions';
+import temp from '../../img/temperature-high.png';
+import humidity from '../../img/humidity-high.png';
+import scale from '../../img/scale.png';
+import { updateSensorData } from '../../actions';
 
 class Sensor extends Component {
     componentDidMount() {

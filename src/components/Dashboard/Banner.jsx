@@ -1,5 +1,5 @@
 import { Container, Card } from 'react-bootstrap';
-import home from "../img/home.png";
+import home from "../../img/home.png";
 
 function Banner() {
     return (
