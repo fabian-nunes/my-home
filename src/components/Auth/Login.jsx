@@ -31,6 +31,7 @@ const LoginForm = ({ loginSuccess, loginFailure }) => {
                 });
                 const data = await response.json();
                 let jwt = data['access_token'];
+                localStorage.setItem('token', jwt);
                 loginSuccess(jwt);
             } else if (response.status === 401) {
                 // Show specific alert for status code 409 (Data already exists)

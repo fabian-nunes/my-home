@@ -1,50 +1,58 @@
-import React, {Component} from "react";
-import {Container, Card, Table} from "react-bootstrap";
-import {connect} from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { Container, Card, Table } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-class HistoryTable extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            history: [],
-        };
-    }
+const HistoryTable = ({ Stype, Sname, token }) => {
+    const [history, setHistory] = useState([]);
 
-    componentDidMount() {
+    useEffect(() => {
+        fetchData();
 
-        fetch(`http://localhost:5000/api/${this.props.type}/data?name=${this.props.Sname}?all=true`, {
+        // Fetch data every 60 seconds
+        const interval = setInterval(fetchData, 60000);
+
+        return () => clearInterval(interval);
+    }, [Stype, Sname, token]);
+
+    const fetchData = () => {
+        fetch(`http://127.0.0.1:5000/api/${Stype}/data?name=${Sname}&all=true`, {
             method: 'GET',
-            headers: new Headers({
-                Authorization: 'Bearer ' + this.props.token,
-            }),
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         })
-            .then((response) => response.json())
-            .then((data) => {
-                this.setState({ history: data });
+            .then((response) => {
+                if (response.status !== 200) {
+                    console.log('Error: ' + response.status);
+                    return;
+                }
+                return response.json();
             })
-            .catch((error) => {
-                console.error('Error:', error);
+            .then((data) => {
+                setHistory(data);
+            })
+            .catch((err) => {
+                console.log(err);
             });
-    }
+    };
 
-    render() {
-        const type = this.props.type;
-        return (
-            <>
-                <Container>
-                    <Card>
-                        <Card.Header>
-                            <Card.Title>History</Card.Title>
-                        </Card.Header>
-                        <Card.Body>
+    return (
+        <>
+            <Container>
+                <Card>
+                    <Card.Header>
+                        <Card.Title>History</Card.Title>
+                    </Card.Header>
+                    <Card.Body>
+                        {history?.length === 0 ? (
+                            <p>Loading...</p>
+                        ) : (
                             <Table striped bordered hover>
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    {type === 'sensor' ? (
-                                        <>
-                                            <th>Value</th>
-                                        </>
+                                    {Stype === 'sensor' ? (
+                                        <th>Value</th>
                                     ) : (
                                         <>
                                             <th>Weight</th>
@@ -64,7 +72,7 @@ class HistoryTable extends Component {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {this.state.history.map((item, index) => (
+                                {history?.map((item, index) => (
                                     <tr key={index}>
                                         <td>{index + 1}</td>
                                         <td>{item.value}</td>
@@ -73,13 +81,13 @@ class HistoryTable extends Component {
                                 ))}
                                 </tbody>
                             </Table>
-                        </Card.Body>
-                    </Card>
-                </Container>
-            </>
-        );
-    }
-}
+                        )}
+                    </Card.Body>
+                </Card>
+            </Container>
+        </>
+    );
+};
 
 const mapStateToProps = (state) => ({
     token: state.auth.token,

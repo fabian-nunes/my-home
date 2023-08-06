@@ -3,12 +3,12 @@ import HistoryTable from "./HistoryTable";
 import { useParams } from "react-router-dom";
 
 const DashHistory = () => {
-    const { name } = useParams();
+    const { name, type } = useParams();
 
     return (
         <>
             <DNav />
-            <HistoryTable Sname={name} type="sensor" />
+            <HistoryTable Sname={name} Stype={type} />
         </>
     )
 }
