@@ -6,15 +6,26 @@ import LoginForm from './components/Auth/Login';
 import DashHistory from './components/History/DashHistory';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
-import { loginSuccess, loginFailure } from './actions';
+import { loginSuccess, loginFailure } from './redux/actions';
+import jwt_decode from 'jwt-decode';
 
 function App({ isLoggedIn, loginSuccess, loginFailure }) {
     // Check local storage on initial component mount
     useEffect(() => {
         const storedToken = localStorage.getItem('token');
         if (storedToken) {
-            // If token exists, consider the user as logged in
-            loginSuccess(storedToken);
+            let decodedToken = jwt_decode(storedToken);
+            console.log("Decoded Token", decodedToken);
+            let currentDate = new Date();
+
+            // JWT exp is in seconds
+            if (decodedToken.exp * 1000 < currentDate.getTime()) {
+                console.log("Token expired.");
+                loginFailure();
+            } else {
+                console.log("Valid token");
+                loginSuccess(storedToken);
+            }
         } else {
             // If token doesn't exist, consider the user as logged out
             loginFailure();
@@ -26,10 +37,10 @@ function App({ isLoggedIn, loginSuccess, loginFailure }) {
             <BrowserRouter>
                 <Routes>
                     {/* If the user is logged in, redirect to the dashboard */}
-                    {isLoggedIn && <Route path="/" element={<Navigate to="/dashboard" />} />}
+                    <Route path="/" element={<Navigate to="/dashboard" />} />
 
                     {/* Route for the Login page */}
-                    <Route path="/login" element={<LoginForm />} />
+                    <Route path="/login" element={!isLoggedIn ? <LoginForm /> : <Navigate to="/dashboard" />} />
 
                     {/* Route for the Dashboard (accessible after login) */}
                     <Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />

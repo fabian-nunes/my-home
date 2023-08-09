@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import temp from '../../img/temperature-high.png';
 import humidity from '../../img/humidity-high.png';
 import scale from '../../img/scale.png';
-import { updateSensorData } from '../../actions';
+import { updateSensorData } from '../../redux/actions';
 
 const Sensor = ({ name, value, time, token, updateSensorData, type }) => {
     useEffect(() => {

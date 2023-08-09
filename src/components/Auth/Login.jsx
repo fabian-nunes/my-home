@@ -4,7 +4,8 @@ import { Container, Button, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import logo from '../../img/home.png';
-import { loginSuccess, loginFailure } from '../../actions/index';
+import { loginSuccess, loginFailure } from '../../redux/actions/index';
+import {useNavigation} from "react-router-dom";
 
 const LoginForm = ({ loginSuccess, loginFailure }) => {
     const MySwal = withReactContent(Swal);
@@ -33,6 +34,7 @@ const LoginForm = ({ loginSuccess, loginFailure }) => {
                 let jwt = data['access_token'];
                 localStorage.setItem('token', jwt);
                 loginSuccess(jwt);
+
             } else if (response.status === 401) {
                 // Show specific alert for status code 409 (Data already exists)
                 MySwal.fire({

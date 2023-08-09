@@ -11,6 +11,7 @@ export const updateSensorData = (name, value, time, alert) => ({
 export const loginSuccess = (token) => ({
     type: 'LOGIN_SUCCESS',
     payload: token,
+    // go to dashboard after login
 });
 
 export const loginFailure = () => ({
