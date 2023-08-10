@@ -1,6 +1,6 @@
 import { Navbar, Container, Nav, Button } from 'react-bootstrap';
-
 import logo from '../../img/logo.png';
+import Logout from "../Auth/Logout";
 
 function HNavbar() {
     return (
@@ -22,7 +22,7 @@ function HNavbar() {
                             <Nav.Link href="/dashboard">Home</Nav.Link>
                             <Nav.Link href="/history/sensor/Temperature">History</Nav.Link>
                         </Nav>
-                        <Button variant="outline-danger">Logout</Button>
+                        <Logout />
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

@@ -33,7 +33,7 @@ function App({ isLoggedIn, loginSuccess, loginFailure }) {
     }, [loginSuccess, loginFailure]);
 
     return (
-        <div className="App" style={{ backgroundColor: '#f4f4f4' }}>
+        <div className="App" style={{ backgroundColor: '#f4f4f4', height: '100vh' }}>
             <BrowserRouter>
                 <Routes>
                     {/* If the user is logged in, redirect to the dashboard */}

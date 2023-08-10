@@ -40,9 +40,6 @@ const HistoryTable = ({ Stype, Sname, token }) => {
         <>
             <Container>
                 <Card>
-                    <Card.Header>
-                        <Card.Title>History</Card.Title>
-                    </Card.Header>
                     <Card.Body>
                         {history?.length === 0 ? (
                             <p>Loading...</p>
