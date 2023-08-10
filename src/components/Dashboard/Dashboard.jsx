@@ -1,4 +1,4 @@
-import HNavbar from "./Navbar";
+import HNavbar from "../Parts/Navbar";
 import Banner from "./Banner";
 import SensorBanner from "./SensorBanner";
 import UploadButton from "./UploadButton";

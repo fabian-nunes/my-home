@@ -19,8 +19,8 @@ function HNavbar() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto my-2 my-lg-0">
-                            <Nav.Link href="#home">Home</Nav.Link>
-                            <Nav.Link href="#history">History</Nav.Link>
+                            <Nav.Link href="/dashboard">Home</Nav.Link>
+                            <Nav.Link href="/history/sensor/Temperature">History</Nav.Link>
                         </Nav>
                         <Button variant="outline-danger">Logout</Button>
                     </Navbar.Collapse>
