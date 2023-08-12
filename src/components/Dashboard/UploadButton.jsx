@@ -17,7 +17,7 @@ const UploadButton = () => {
         const formData = new FormData(event.target); // Get the form data
 
         // Use fetch to post the form data to the server
-        fetch('http://127.0.0.1:5000/api/scale/data', {
+        fetch('http://192.168.1.200:5000/api/scale/data', {
             method: 'POST',
             body: formData,
         })

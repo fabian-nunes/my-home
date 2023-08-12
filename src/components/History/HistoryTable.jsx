@@ -15,7 +15,7 @@ const HistoryTable = ({ Stype, Sname, token }) => {
     }, [Stype, Sname, token]);
 
     const fetchData = () => {
-        fetch(`http://127.0.0.1:5000/api/${Stype}/data?name=${Sname}&all=true`, {
+        fetch(`http://192.168.1.200:5000/api/${Stype}/data?name=${Sname}&all=true`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`,
