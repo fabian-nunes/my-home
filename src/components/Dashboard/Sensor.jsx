@@ -17,7 +17,7 @@ const Sensor = ({ name, value, time, token, updateSensorData, type }) => {
     }, [name, token, type]);
 
     const fetchData = () => {
-        fetch(`http://localhost:5000/api/${type}/data?name=${name}&all=false`, {
+        fetch(`http://192.168.1.200:5000/api/${type}/data?name=${name}&all=false`, {
             method: 'GET',
             headers: {
                 Authorization: `Bearer ${token}`,
