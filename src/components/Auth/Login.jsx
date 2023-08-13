@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import logo from '../../img/home.png';
 import { loginSuccess, loginFailure } from '../../redux/actions/index';
+import {Link} from "react-router-dom";
 
 const LoginForm = ({ loginSuccess, loginFailure }) => {
     const MySwal = withReactContent(Swal);
@@ -82,6 +83,7 @@ const LoginForm = ({ loginSuccess, loginFailure }) => {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" name="password" required />
                         </Form.Group>
+                        <Link to="/register" style={{fontSize: '13px'}}>Don't have an account? Register here.</Link>
                         <Button
                             className="w-100 mt-4 mb-4"
                             type="submit"

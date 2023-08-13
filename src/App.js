@@ -3,7 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/Dashboard/Dashboard';
 import LoginForm from './components/Auth/Login';
+import Register from './components/Auth/Register';
 import DashHistory from './components/History/DashHistory';
+import Confirm from "./components/Auth/Confirm";
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import { loginSuccess, loginFailure } from './redux/actions';
@@ -42,11 +44,16 @@ function App({ isLoggedIn, loginSuccess, loginFailure }) {
                     {/* Route for the Login page */}
                     <Route path="/login" element={!isLoggedIn ? <LoginForm /> : <Navigate to="/dashboard" />} />
 
+                    <Route path="/register" element={!isLoggedIn ? <Register /> : <Navigate to="/dashboard" />} />
+
                     {/* Route for the Dashboard (accessible after login) */}
                     <Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
 
                     {/* Route for the History Table (accessible after login) */}
                     <Route path="/history/:type/:name" element={isLoggedIn ? <DashHistory /> : <Navigate to="/login" />} />
+
+                    {/* Route for the Confirmation page */}
+                    <Route path="/confirm/:token" element={!isLoggedIn ? <Confirm /> : <Navigate to="/dashboard" />} />
 
                     {/* If the user is not logged in and tries to access any other page, redirect to the login page */}
                     <Route path="*" element={isLoggedIn ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
