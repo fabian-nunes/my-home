@@ -1,24 +1,25 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import Sensor from "./Sensor";
+import { connect } from 'react-redux';
 
-const SensorBanner = () => {
+const SensorBanner = ({ sensors }) => {
     return (
         <>
             <Container className="mt-4">
                 <Row>
-                    <Col sm={4}>
-                        <Sensor name="Temperature" type="sensor" />
-                    </Col>
-                    <Col sm={4}>
-                        <Sensor name="Humidity" type="sensor" />
-                    </Col>
-                    <Col sm={4}>
-                        <Sensor name="Scale" type="scale" />
-                    </Col>
+                    {Object.values(sensors).map((sensor) => (
+                        <Col sm={4}>
+                            <Sensor name={sensor.name} type={sensor.name === 'Scale' ? 'scale' : 'sensor'} />
+                        </Col>
+                    ))}
                 </Row>
             </Container>
         </>
     );
 }
 
-export default SensorBanner;
+const mapStateToProps = (state) => ({
+    sensors: state.sensors.sensors,
+});
+
+export default connect(mapStateToProps)(SensorBanner);

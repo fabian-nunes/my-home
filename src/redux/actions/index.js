@@ -21,3 +21,16 @@ export const loginFailure = () => ({
 export const logout = () => ({
     type: 'LOGOUT',
 });
+
+export const fetchSensors = () => async (dispatch) => {
+    try {
+        const response = await fetch('http://192.168.1.200:5000/api/sensor/all');
+        const sensors = await response.json();
+        dispatch({
+            type: 'INITIALIZE_SENSORS',
+            payload: sensors,
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}

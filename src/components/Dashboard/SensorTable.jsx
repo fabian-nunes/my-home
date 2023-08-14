@@ -51,7 +51,7 @@ const SensorTable = ({ sensors }) => {
 }
 
 const mapStateToProps = (state) => ({
-    sensors: state.sensors,
+    sensors: state.sensors.sensors,
 });
 
 export default connect(mapStateToProps)(SensorTable);
