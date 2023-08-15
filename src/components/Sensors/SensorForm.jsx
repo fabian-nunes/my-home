@@ -84,23 +84,23 @@ const SensorForm = ({token}) => {
                     <Modal.Body>
                       <Form.Group className="mb-3" controlId="formName">
                           <Form.Label>Sensor Name</Form.Label>
-                          <Form.Control placeholder="Temperature" required />
+                          <Form.Control placeholder="Temperature" name="name" required />
                       </Form.Group>
 
                       <Row className="mb-3">
                           <Form.Group as={Col} controlId="formMin">
                               <Form.Label>Min Value</Form.Label>
-                                <Form.Control type="number" placeholder="0" required />
+                                <Form.Control type="number" name="min" placeholder="0" required />
                           </Form.Group>
 
                           <Form.Group as={Col} controlId="formMax">
                               <Form.Label>Max Value</Form.Label>
-                                <Form.Control type="number" placeholder="100" required />
+                                <Form.Control type="number" name="max" placeholder="100" required />
                           </Form.Group>
                       </Row>
                       <Form.Group controlId="formFile" className="mb-3">
                           <Form.Label>Default file input example</Form.Label>
-                          <Form.Control type="file" required />
+                          <Form.Control type="file" name="img" accept="image/*" required />
                       </Form.Group>
                     </Modal.Body>
                     <Modal.Footer>
