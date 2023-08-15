@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import {Form, Row, Col, Button, Modal} from "react-bootstrap";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { connect } from 'react-redux';
 
-const SensorForm = () => {
+const SensorForm = ({token}) => {
     const [show, setShow] = useState(false);
     const MySwal = withReactContent(Swal);
     const handleClose = () => setShow(false);
@@ -16,6 +17,9 @@ const SensorForm = () => {
         // Use fetch to post the form data to the server
         fetch('http://192.168.1.200:5000/api/sensor/create', {
             method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
             body: formData,
         })
             .then((response) => {
@@ -96,7 +100,7 @@ const SensorForm = () => {
                       </Row>
                       <Form.Group controlId="formFile" className="mb-3">
                           <Form.Label>Default file input example</Form.Label>
-                          <Form.Control type="file" />
+                          <Form.Control type="file" required />
                       </Form.Group>
                     </Modal.Body>
                     <Modal.Footer>
@@ -113,4 +117,9 @@ const SensorForm = () => {
     );
 }
 
-export default SensorForm;
+const mapStateToProps = (state, ownProps) => ({
+    sensor: state.sensors.sensors.find(sensor => sensor.name === ownProps.name),
+    token: state.auth.token,
+});
+
+export default connect(mapStateToProps)(SensorForm);
