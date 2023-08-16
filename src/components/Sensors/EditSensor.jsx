@@ -56,7 +56,6 @@ const SensorForm = ({ token, sensor, name }) => {
             const form = document.getElementById('sensorForm'); // Add an ID to the form element
             if (form) {
                 // Assuming your API response format matches the field names
-                form.name.value = sensorData.name || '';
                 form.min.value = sensorData.min || '';
                 form.max.value = sensorData.max || '';
             }
@@ -68,7 +67,7 @@ const SensorForm = ({ token, sensor, name }) => {
         const formData = new FormData(event.target); // Get the form data
 
         // Use fetch to post the form data to the server
-        fetch('http://192.168.1.200:5000/api/sensor/create', {
+        fetch(`http://192.168.1.200:5000/api/sensor/create?name=${sensor.name}`, {
             method: 'PUT',
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -133,10 +132,6 @@ const SensorForm = ({ token, sensor, name }) => {
                         <Modal.Title>Edit Sensor</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form.Group className="mb-3" controlId="formName">
-                            <Form.Label>Sensor Name</Form.Label>
-                            <Form.Control placeholder="Temperature" name="name" required />
-                        </Form.Group>
 
                         <Row className="mb-3">
                             <Form.Group as={Col} controlId="formMin">
