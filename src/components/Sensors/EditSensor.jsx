@@ -30,6 +30,7 @@ const SensorForm = ({ token, sensor, name }) => {
 
     useEffect(() => {
         if (show && sensorData) {
+            alert(JSON.stringify(sensorData));
             // Populate form fields with fetched sensor data
             const form = document.getElementById('sensorForm'); // Add an ID to the form element
             if (form) {
@@ -103,12 +104,12 @@ const SensorForm = ({ token, sensor, name }) => {
 
     return (
         <>
-            <Button variant="success" onClick={handleShow} className="float-end">Create Sensor</Button>
+            <Button variant="warning" onClick={handleShow} className="float-end">Edit</Button>
 
             <Modal show={show} onHide={handleClose}>
                 <Form id="sensorForm" onSubmit={onSubmit} encType="multipart/form-data">
                     <Modal.Header closeButton>
-                        <Modal.Title>Create Sensor</Modal.Title>
+                        <Modal.Title>Edit Sensor</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form.Group className="mb-3" controlId="formName">

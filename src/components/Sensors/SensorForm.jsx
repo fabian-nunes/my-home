@@ -74,12 +74,12 @@ const SensorForm = ({token}) => {
 
     return (
       <>
-          <Button variant="warning" onClick={handleShow} className="float-end">Edit</Button>
+          <Button variant="success" onClick={handleShow} className="float-end">Create Sensor</Button>
 
           <Modal show={show} onHide={handleClose}>
               <Form onSubmit={onSubmit} encType="multipart/form-data">
                     <Modal.Header closeButton>
-                        <Modal.Title>Edit Sensor</Modal.Title>
+                        <Modal.Title>Create Sensor</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                       <Form.Group className="mb-3" controlId="formName">
