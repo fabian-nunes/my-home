@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 const SensorForm = ({ token, sensor, name }) => {
     const [show, setShow] = useState(false);
     const [sensorData, setSensorData] = useState(null);
+    const [sensorImage, setSensorImage] = useState(null);
     const MySwal = withReactContent(Swal);
 
     const handleClose = () => setShow(false);
@@ -29,8 +30,28 @@ const SensorForm = ({ token, sensor, name }) => {
     }, [show, sensor, token]);
 
     useEffect(() => {
+        if (show && sensor) {
+            // Fetch the specific sensor's image using the API
+            fetch(`http://192.168.1.200:5000/api/sensor/image?name=${sensor.name}`, {
+                method: 'GET',
+            })
+                .then((response) => response.blob()) // Use blob() to get image data as a Blob
+                .then((imageBlob) => {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        setSensorImage(reader.result); // Set the fetched image data
+                    };
+                    reader.readAsDataURL(imageBlob);
+                })
+                .catch((error) => {
+                    console.error('Error fetching sensor image:', error);
+                });
+        }
+    }, [show, sensor]);
+
+    useEffect(() => {
         if (show && sensorData) {
-            alert(JSON.stringify(sensorData));
+            //alert(JSON.stringify(sensorData));
             // Populate form fields with fetched sensor data
             const form = document.getElementById('sensorForm'); // Add an ID to the form element
             if (form) {
@@ -128,6 +149,14 @@ const SensorForm = ({ token, sensor, name }) => {
                                 <Form.Control type="number" name="max" placeholder="100" required />
                             </Form.Group>
                         </Row>
+                        <p>Current Image</p>
+                        {sensorImage && (
+                            <img
+                                src={sensorImage} // Use the image data directly as the src
+                                alt="Sensor"
+                                style={{ maxWidth: '100%', maxHeight: '100px' }}
+                            />
+                        )}
                         <Form.Group controlId="formFile" className="mb-3">
                             <Form.Label>Default file input example</Form.Label>
                             <Form.Control type="file" name="img" accept="image/*" required />
