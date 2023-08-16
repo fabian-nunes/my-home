@@ -15,7 +15,7 @@ const SensorForm = ({ token, sensor, name }) => {
     useEffect(() => {
         if (show && sensor) {
             // Fetch the specific sensor's data using the API
-            fetch(`http://192.168.1.200:5000/api/sensor/specs?all=true&name=${sensor.name}`, {
+            fetch(`http://192.168.1.200:5000/api/sensor/specs?all=false&name=${sensor.name}`, {
                 method: 'GET',
             })
                 .then((response) => response.json())
