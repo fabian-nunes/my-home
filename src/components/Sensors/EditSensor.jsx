@@ -104,7 +104,7 @@ const SensorForm = ({ token, sensor, name }) => {
 
     return (
         <>
-            <Button variant="warning" onClick={handleShow} className="float-end">Edit</Button>
+            <Button variant="warning" onClick={handleShow}>Edit</Button>
 
             <Modal show={show} onHide={handleClose}>
                 <Form id="sensorForm" onSubmit={onSubmit} encType="multipart/form-data">
