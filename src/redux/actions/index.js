@@ -24,7 +24,7 @@ export const logout = () => ({
 
 export const fetchSensors = () => async (dispatch) => {
     try {
-        const response = await fetch('http://192.168.1.200:5000/api/sensor/all');
+        const response = await fetch('http://192.168.1.200:5000/api/sensor/specs?all=true');
         const sensors = await response.json();
         dispatch({
             type: 'INITIALIZE_SENSORS',

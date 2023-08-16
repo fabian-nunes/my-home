@@ -74,12 +74,12 @@ const SensorForm = ({token}) => {
 
     return (
       <>
-          <Button variant="success" onClick={handleShow} className="float-end">Create Sensor</Button>
+          <Button variant="warning" onClick={handleShow} className="float-end">Edit</Button>
 
           <Modal show={show} onHide={handleClose}>
               <Form onSubmit={onSubmit} encType="multipart/form-data">
                     <Modal.Header closeButton>
-                        <Modal.Title>Create Sensor</Modal.Title>
+                        <Modal.Title>Edit Sensor</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                       <Form.Group className="mb-3" controlId="formName">
@@ -117,8 +117,8 @@ const SensorForm = ({token}) => {
     );
 }
 
-const mapStateToProps = (state, ownProps) => ({
-    sensor: state.sensors.sensors.find(sensor => sensor.name === ownProps.name),
+const mapStateToProps = (state) => ({
+    //sensor: state.sensors.sensors.find(sensor => sensor.name === ownProps.name),
     token: state.auth.token,
 });
 

@@ -2,6 +2,7 @@ import {Container, Card, Table, Button} from "react-bootstrap";
 import React from 'react';
 import { connect } from 'react-redux';
 import SensorForm from "./SensorForm";
+import EditSensor from "./EditSensor";
 
 const SensorTable = ({ sensors }) => {
     return (
@@ -34,9 +35,7 @@ const SensorTable = ({ sensors }) => {
                                         </Button>
                                     </td>
                                     <td>
-                                        <Button variant="warning" type="submit">
-                                            Edit
-                                        </Button>
+                                        <EditSensor name={sensor.name} />
                                     </td>
                                     <td>
                                         <Button variant="danger" type="submit">
