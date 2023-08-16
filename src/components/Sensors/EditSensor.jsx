@@ -150,16 +150,18 @@ const SensorForm = ({ token, sensor, name }) => {
                             </Form.Group>
                         </Row>
                         <p>Current Image</p>
-                        {sensorImage && (
-                            <img
-                                src={sensorImage} // Use the image data directly as the src
-                                alt="Sensor"
-                                style={{ maxWidth: '100%', maxHeight: '100px' }}
-                            />
-                        )}
+                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            {sensorImage && (
+                                <img
+                                    src={sensorImage}
+                                    alt="Sensor"
+                                    style={{ maxWidth: '100%', maxHeight: '100px' }}
+                                />
+                            )}
+                        </div>
                         <Form.Group controlId="formFile" className="mb-3">
                             <Form.Label>Default file input example</Form.Label>
-                            <Form.Control type="file" name="img" accept="image/*" required />
+                            <Form.Control type="file" name="img" accept="image/*" />
                         </Form.Group>
                     </Modal.Body>
                     <Modal.Footer>
