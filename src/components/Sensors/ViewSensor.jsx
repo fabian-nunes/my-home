@@ -92,10 +92,6 @@ const ViewForm = ({ sensor}) => {
                                 />
                             )}
                         </div>
-                        <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label>Default file input example</Form.Label>
-                            <Form.Control type="file" name="img" accept="image/*" />
-                        </Form.Group>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
