@@ -65,7 +65,7 @@ const ViewForm = ({ sensor}) => {
             <Button variant="primary" onClick={handleShow}>View</Button>
 
             <Modal show={show} onHide={handleClose}>
-                <Form id="viewrForm" encType="multipart/form-data">
+                <Form id="viewForm" encType="multipart/form-data">
                     <Modal.Header closeButton>
                         <Modal.Title>Edit Sensor</Modal.Title>
                     </Modal.Header>
