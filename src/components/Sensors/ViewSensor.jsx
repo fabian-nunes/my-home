@@ -62,7 +62,7 @@ const ViewForm = ({ sensor}) => {
 
     return (
         <>
-            <Button variant="warning" onClick={handleShow}>Edit</Button>
+            <Button variant="primary" onClick={handleShow}>View</Button>
 
             <Modal show={show} onHide={handleClose}>
                 <Form id="viewrForm" encType="multipart/form-data">
