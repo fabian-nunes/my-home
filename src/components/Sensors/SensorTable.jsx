@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import SensorForm from "./SensorForm";
 import EditSensor from "./EditSensor";
 import ViewForm from "./ViewSensor";
+import DeleteForm from "./DeleteSensor";
 
 const SensorTable = ({ sensors }) => {
     return (
@@ -31,15 +32,13 @@ const SensorTable = ({ sensors }) => {
                                 <tr key={sensor.name}>
                                     <td>{sensor.name}</td>
                                     <td>
-                                        <ViewForm name={sensor.name} />
+                                        {sensor.name !== 'Scale' && <ViewForm name={sensor.name} />}
                                     </td>
                                     <td>
-                                        <EditSensor name={sensor.name} />
+                                        {sensor.name !== 'Scale' && <EditSensor name={sensor.name} />}
                                     </td>
                                     <td>
-                                        <Button variant="danger" type="submit">
-                                            Delete
-                                        </Button>
+                                        {sensor.name !== 'Scale' && <DeleteForm name={sensor.name} />}
                                     </td>
                                 </tr>
                             ))}
