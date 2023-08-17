@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { connect } from 'react-redux';
 
-const SensorForm = ({ token, sensor, name }) => {
+const EditForm = ({ token, sensor, name }) => {
     const [show, setShow] = useState(false);
     const [sensorData, setSensorData] = useState(null);
     const [sensorImage, setSensorImage] = useState(null);
@@ -178,4 +178,4 @@ const mapStateToProps = (state, ownProps) => ({
     token: state.auth.token,
 });
 
-export default connect(mapStateToProps)(SensorForm);
+export default connect(mapStateToProps)(EditForm);

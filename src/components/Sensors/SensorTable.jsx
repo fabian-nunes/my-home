@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import SensorForm from "./SensorForm";
 import EditSensor from "./EditSensor";
+import ViewForm from "./ViewSensor";
 
 const SensorTable = ({ sensors }) => {
     return (
@@ -30,9 +31,7 @@ const SensorTable = ({ sensors }) => {
                                 <tr key={sensor.name}>
                                     <td>{sensor.name}</td>
                                     <td>
-                                        <Button variant="primary" type="submit">
-                                            View
-                                        </Button>
+                                        <ViewForm name={sensor.name} />
                                     </td>
                                     <td>
                                         <EditSensor name={sensor.name} />
