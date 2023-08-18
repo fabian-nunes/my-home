@@ -3,8 +3,9 @@ import {Form, Row, Col, Button, Modal} from "react-bootstrap";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { connect } from 'react-redux';
+import { addSensor } from "../../redux/actions";
 
-const SensorForm = ({token}) => {
+const SensorForm = ({token, addSensor}) => {
     const [show, setShow] = useState(false);
     const MySwal = withReactContent(Swal);
     const handleClose = () => setShow(false);
@@ -30,6 +31,7 @@ const SensorForm = ({token}) => {
                         text: 'Sensor has been created.',
                         icon: 'success'
                     });
+                    addSensor(formData.get('name'));
                 } else if (response.status === 400) {
                     // Show specific alert for status code 400 (Bad request)
                     MySwal.fire({
@@ -67,7 +69,6 @@ const SensorForm = ({token}) => {
                 });
                 handleClose();
             });
-
         //clear form
         event.target.reset();
     }
@@ -122,4 +123,8 @@ const mapStateToProps = (state) => ({
     token: state.auth.token,
 });
 
-export default connect(mapStateToProps)(SensorForm);
+const mapDispatchToProps = {
+    addSensor,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SensorForm);

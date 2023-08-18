@@ -39,3 +39,8 @@ export const removeSensor = (name) => ({
     type: 'REMOVE_SENSOR',
     payload: name,
 });
+
+export const addSensor = (name, type, unit, min, max) => ({
+    type: 'ADD_SENSOR',
+    payload: name,
+});

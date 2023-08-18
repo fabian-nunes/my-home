@@ -51,6 +51,19 @@ const sensorReducer = (state = initialState, action) => {
                 ...state,
                 sensors: state.sensors.filter(sensor => sensor.name !== action.payload),
             };
+        case 'ADD_SENSOR':
+            return {
+                ...state,
+                sensors: [
+                    ...state.sensors,
+                    {
+                        name: action.payload,
+                        value: 0,
+                        time: new Date().toLocaleTimeString(),
+                        alert: 'Normal',
+                    },
+                ],
+            };
         default:
             return state;
     }
