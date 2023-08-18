@@ -37,6 +37,7 @@ const DeleteForm = ({ token, sensor}) => {
                     // You might also need to update your UI or perform other actions after successful deletion
                 } else {
                     setIsDeleting(false);
+                    console.log(response);
                     await MySwal.fire('Error', 'Failed to delete the item.', 'error');
                 }
             }
