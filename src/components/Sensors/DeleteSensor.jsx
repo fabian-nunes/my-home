@@ -23,7 +23,7 @@ const DeleteForm = ({ token, sensor}) => {
             if (result.isConfirmed) {
                 setIsDeleting(true);
 
-                const response = await fetch(`http://192.168.1.200/api/sensor/delete?name=${sensor.name}`, {
+                const response = await fetch(`http://192.168.1.200:5000/api/sensor/delete?name=${sensor.name}`, {
                     method: 'DELETE',
                     headers: {
                         'Authorization': `Bearer ${token}`,
