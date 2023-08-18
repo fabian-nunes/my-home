@@ -3,8 +3,9 @@ import {Button} from "react-bootstrap";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { connect } from 'react-redux';
+import { removeSensor } from "../../redux/actions";
 
-const DeleteForm = ({ token, sensor}) => {
+const DeleteForm = ({ token, sensor, removeSensor}) => {
     const [isDeleting, setIsDeleting] = useState(false);
     const MySwal = withReactContent(Swal);
 
@@ -33,6 +34,7 @@ const DeleteForm = ({ token, sensor}) => {
 
                 if (response.ok) {
                     setIsDeleting(false);
+                    removeSensor(sensor.name);
                     await MySwal.fire('Deleted!', 'Your item has been deleted.', 'success');
                     // You might also need to update your UI or perform other actions after successful deletion
                 } else {
@@ -60,4 +62,8 @@ const mapStateToProps = (state, ownProps) => ({
     token: state.auth.token,
 });
 
-export default connect(mapStateToProps)(DeleteForm);
+const mapDispatchToProps = {
+    removeSensor,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeleteForm);

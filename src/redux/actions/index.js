@@ -34,3 +34,8 @@ export const fetchSensors = () => async (dispatch) => {
         console.error(error);
     }
 }
+
+export const removeSensor = (name) => ({
+    type: 'REMOVE_SENSOR',
+    payload: name,
+});

@@ -46,6 +46,11 @@ const sensorReducer = (state = initialState, action) => {
                     sensor.name === name ? { ...sensor, value, time, alert } : sensor
                 ),
             };
+        case 'REMOVE_SENSOR':
+            return {
+                ...state,
+                sensors: state.sensors.filter(sensor => sensor.name !== action.payload),
+            };
         default:
             return state;
     }
