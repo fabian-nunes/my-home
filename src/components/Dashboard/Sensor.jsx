@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import Card from 'react-bootstrap/Card';
-import temp from '../../img/temperature-high.png';
-import humidity from '../../img/humidity-high.png';
 import scale from '../../img/scale.png';
 import { updateSensorData } from '../../redux/actions';
 
@@ -70,7 +68,7 @@ const Sensor = ({ sensor, token, updateSensorData }) => {
             </Card.Header>
             <Card.Body>
                 {name === 'Scale' ? (
-                    <img src={temp} alt="temperature" />
+                    <img src={scale} alt="temperature" />
                 ) : (
                     sensorImage && (
                         <img

@@ -58,6 +58,7 @@ const EditForm = ({ token, sensor}) => {
                 // Assuming your API response format matches the field names
                 form.min.value = sensorData.min || '';
                 form.max.value = sensorData.max || '';
+                form.color.value = sensorData.color || '';
             }
         }
     }, [show, sensorData]);
@@ -154,10 +155,17 @@ const EditForm = ({ token, sensor}) => {
                                 />
                             )}
                         </div>
-                        <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label>Default file input example</Form.Label>
-                            <Form.Control type="file" name="img" accept="image/*" />
-                        </Form.Group>
+                        <Row className="mb-3">
+                            <Form.Group controlId="formFile" as={Col}>
+                                <Form.Label>Default file input example</Form.Label>
+                                <Form.Control type="file" name="img" accept="image/*" required />
+                            </Form.Group>
+
+                            <Form.Group controlId="formColor" as={Col}>
+                                <Form.Label>Color</Form.Label>
+                                <Form.Control type="color" name="color" defaultValue="#E9B384"  title="Choose the color card" required />
+                            </Form.Group>
+                        </Row>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
