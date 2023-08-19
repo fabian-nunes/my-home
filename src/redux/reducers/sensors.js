@@ -5,6 +5,7 @@ const initialState = {
             value: 0,
             time: new Date().toLocaleTimeString(),
             alert: 'Normal',
+            color: '#E9B384',
         },
     ],
 };

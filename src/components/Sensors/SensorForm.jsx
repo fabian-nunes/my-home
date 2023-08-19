@@ -99,10 +99,17 @@ const SensorForm = ({token, addSensor}) => {
                                 <Form.Control type="number" name="max" placeholder="100" required />
                           </Form.Group>
                       </Row>
-                      <Form.Group controlId="formFile" className="mb-3">
-                          <Form.Label>Default file input example</Form.Label>
-                          <Form.Control type="file" name="img" accept="image/*" required />
-                      </Form.Group>
+                      <Row className="mb-3">
+                          <Form.Group controlId="formFile" as={Col}>
+                              <Form.Label>Default file input example</Form.Label>
+                              <Form.Control type="file" name="img" accept="image/*" required />
+                          </Form.Group>
+
+                            <Form.Group controlId="formColor" as={Col}>
+                                <Form.Label>Color</Form.Label>
+                                <Form.Control type="color" name="color" defaultValue="#E9B384"  title="Choose the color card" required />
+                            </Form.Group>
+                      </Row>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import { connect } from 'react-redux';
 import Card from 'react-bootstrap/Card';
 import temp from '../../img/temperature-high.png';
@@ -7,7 +7,8 @@ import scale from '../../img/scale.png';
 import { updateSensorData } from '../../redux/actions';
 
 const Sensor = ({ sensor, token, updateSensorData }) => {
-    const { name, value, time, type } = sensor;
+    const { name, value, time, type, color } = sensor;
+    const [sensorImage, setSensorImage] = useState(null);
 
     useEffect(() => {
         fetchData();
@@ -16,7 +17,25 @@ const Sensor = ({ sensor, token, updateSensorData }) => {
         const interval = setInterval(fetchData, 60000);
 
         return () => clearInterval(interval);
-    }, [name, token, type]);
+    }, [name, token, type, color]);
+
+    useEffect(() => {
+        // Fetch the specific sensor's image using the API
+        fetch(`http://192.168.1.200:5000/api/sensor/image?name=${name}`, {
+            method: 'GET',
+        })
+            .then((response) => response.blob()) // Use blob() to get image data as a Blob
+            .then((imageBlob) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    setSensorImage(reader.result); // Set the fetched image data
+                };
+                reader.readAsDataURL(imageBlob);
+            })
+            .catch((error) => {
+                console.error('Error fetching sensor image:', error);
+            });
+    }, [name]);
 
     const fetchData = () => {
         fetch(`http://192.168.1.200:5000/api/${type}/data?name=${name}&all=false`, {
@@ -46,26 +65,19 @@ const Sensor = ({ sensor, token, updateSensorData }) => {
 
     return (
         <Card className="text-center">
-            {name === 'Temperature' ? (
-                <Card.Header className="fw-bold" style={{ backgroundColor: '#A1CCD1' }}>
-                    {name}: {value} ºC
-                </Card.Header>
-            ) : name === 'Humidity' ? (
-                <Card.Header className="fw-bold" style={{ backgroundColor: '#F4F2DE' }}>
-                    {name}: {value} %
-                </Card.Header>
-            ) : (
-                <Card.Header className="fw-bold" style={{ backgroundColor: '#E9B384' }}>
-                    {name}: {value} Kg
-                </Card.Header>
-            )}
+            <Card.Header className="fw-bold" style={{ backgroundColor: color }}>
+                {name}: {value}
+            </Card.Header>
             <Card.Body>
-                {name === 'Temperature' ? (
+                {name === 'Scale' ? (
                     <img src={temp} alt="temperature" />
-                ) : name === 'Humidity' ? (
-                    <img src={humidity} alt="humidity" />
                 ) : (
-                    <img src={scale} alt="scale" />
+                    sensorImage && (
+                        <img
+                            src={sensorImage}
+                            alt="Sensor"
+                        />
+                    )
                 )}
             </Card.Body>
             <Card.Footer>
