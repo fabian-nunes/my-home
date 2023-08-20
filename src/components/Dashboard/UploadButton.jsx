@@ -2,10 +2,10 @@ import { useState } from 'react';
 import {Container, Button, Modal, Form} from "react-bootstrap";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { connect } from 'react-redux';
 
 
-
-const UploadButton = () => {
+const UploadButton = ({token}) => {
     const [show, setShow] = useState(false);
     const MySwal = withReactContent(Swal);
 
@@ -19,6 +19,9 @@ const UploadButton = () => {
         // Use fetch to post the form data to the server
         fetch('http://192.168.1.200:5000/api/scale/data', {
             method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
             body: formData,
         })
             .then((response) => {
@@ -77,7 +80,6 @@ const UploadButton = () => {
                             <Form.Group controlId="formFile" className="mb-3">
                                 <Form.Label>Cecotec Shared Data</Form.Label>
                                 <Form.Control type="file" id="img" name="img" accept="image/*" />
-                                <Form.Control type="input" name="user" value="1" hidden />
                             </Form.Group>
                         </Modal.Body>
                         <Modal.Footer>
@@ -95,4 +97,8 @@ const UploadButton = () => {
     );
 }
 
-export default UploadButton;
+const mapStateToProps = (state, ownProps) => ({
+    token: state.auth.token,
+});
+
+export default connect(mapStateToProps)(UploadButton);
