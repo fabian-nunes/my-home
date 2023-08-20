@@ -1,6 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import Homepage from "./components/Homepage";
 import Dashboard from './components/Dashboard/Dashboard';
 import LoginForm from './components/Auth/Login';
 import Register from './components/Auth/Register';
@@ -40,7 +41,7 @@ function App({ isLoggedIn, loginSuccess, loginFailure }) {
             <BrowserRouter>
                 <Routes>
                     {/* If the user is logged in, redirect to the dashboard */}
-                    <Route path="/" element={<Navigate to="/dashboard" />} />
+                    <Route path="/" element={!isLoggedIn ? <Homepage /> : <Navigate to="/dashboard" />} />
 
                     {/* Route for the Login page */}
                     <Route path="/login" element={!isLoggedIn ? <LoginForm /> : <Navigate to="/dashboard" />} />

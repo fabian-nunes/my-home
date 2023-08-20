@@ -3,11 +3,12 @@ import logo from "../../img/home.png";
 import React, {useState} from "react";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const Register = () => {
     const MySwal = withReactContent(Swal);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault(); // Prevent default form submission behavior
@@ -26,6 +27,7 @@ const Register = () => {
                         text: 'Registration successful. Check your email for a verification link.',
                         icon: 'success'
                     });
+                    navigate('/');
                 } else {
                     // Show generic failure alert for any other status code
                     MySwal.fire({
