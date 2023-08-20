@@ -70,11 +70,32 @@ const HistoryTable = ({ Stype, Sname, token }) => {
                                 </thead>
                                 <tbody>
                                 {history?.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>{index + 1}</td>
-                                        <td>{item.value}</td>
-                                        <td>{item.createdAt}</td>
-                                    </tr>
+                                    //if stype is sensor, only show value
+                                    //if stype is scale, show all values
+                                    Stype === 'sensor' ? (
+                                        <tr key={index}>
+                                            <td>{index + 1}</td>
+                                            <td>{item.value}</td>
+                                            <td>{item.createdAt}</td>
+                                        </tr>
+                                    ) : (
+                                        <tr key={index}>
+                                            <td>{index + 1}</td>
+                                            <td>{item.weight}</td>
+                                            <td>{item.bmi}</td>
+                                            <td>{item.bmi}</td>
+                                            <td>{item.fat}</td>
+                                            <td>{item.sub_fat}</td>
+                                            <td>{item.visc_fat}</td>
+                                            <td>{item.water}</td>
+                                            <td>{item.muscle_skeleton}</td>
+                                            <td>{item.mass_muscle}</td>
+                                            <td>{item.bone_mass}</td>
+                                            <td>{item.protein}</td>
+                                            <td>{item.tmb}</td>
+                                            <td>{item.createdAt}</td>
+                                        </tr>
+                                    )
                                 ))}
                                 </tbody>
                             </Table>
