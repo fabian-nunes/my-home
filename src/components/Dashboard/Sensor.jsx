@@ -5,7 +5,7 @@ import scale from '../../img/scale.png';
 import { updateSensorData } from '../../redux/actions';
 
 const Sensor = ({ sensor, token, updateSensorData }) => {
-    const { name, value, time, type, color } = sensor;
+    const { name, value, time, color } = sensor;
     const [sensorImage, setSensorImage] = useState(null);
 
     useEffect(() => {
@@ -15,11 +15,12 @@ const Sensor = ({ sensor, token, updateSensorData }) => {
         const interval = setInterval(fetchData, 60000);
 
         return () => clearInterval(interval);
-    }, [name, token, type, color]);
+    }, [name, token, color]);
 
     useEffect(() => {
         // Fetch the specific sensor's image using the API
-        fetch(`http://192.168.1.200:5000/api/sensor/image?name=${name}`, {
+        let type = name === 'Scale' ? 'scale' : 'sensor';
+        fetch(`http://192.168.1.200:5000/api/${type}/image?name=${name}`, {
             method: 'GET',
         })
             .then((response) => response.blob()) // Use blob() to get image data as a Blob

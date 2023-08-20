@@ -9,7 +9,7 @@ const SensorBanner = ({ sensors }) => {
                 <Row>
                     {Object.values(sensors).map((sensor) => (
                         <Col sm={4}>
-                            <Sensor name={sensor.name} type={sensor.name === 'Scale' ? 'scale' : 'sensor'} />
+                            <Sensor name={sensor.name} />
                         </Col>
                     ))}
                 </Row>
