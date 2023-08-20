@@ -19,8 +19,7 @@ const Sensor = ({ sensor, token, updateSensorData }) => {
 
     useEffect(() => {
         // Fetch the specific sensor's image using the API
-        let type = name === 'Scale' ? 'scale' : 'sensor';
-        fetch(`http://192.168.1.200:5000/api/${type}/image?name=${name}`, {
+        fetch(`http://192.168.1.200:5000/api/sensor/image?name=${name}`, {
             method: 'GET',
         })
             .then((response) => response.blob()) // Use blob() to get image data as a Blob
@@ -37,6 +36,7 @@ const Sensor = ({ sensor, token, updateSensorData }) => {
     }, [name]);
 
     const fetchData = () => {
+        let type = name === 'Scale' ? 'scale' : 'sensor';
         fetch(`http://192.168.1.200:5000/api/${type}/data?name=${name}&all=false`, {
             method: 'GET',
             headers: {
