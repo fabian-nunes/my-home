@@ -83,7 +83,6 @@ const HistoryTable = ({ Stype, Sname, token }) => {
                                             <td>{index + 1}</td>
                                             <td>{item.weight}</td>
                                             <td>{item.bmi}</td>
-                                            <td>{item.bmi}</td>
                                             <td>{item.fat}</td>
                                             <td>{item.sub_fat}</td>
                                             <td>{item.visc_fat}</td>
