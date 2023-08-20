@@ -20,7 +20,7 @@ function HNavbar() {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto my-2 my-lg-0">
                             <Nav.Link href="/dashboard">Home</Nav.Link>
-                            <Nav.Link href="/history/sensor/Temperature">History</Nav.Link>
+                            <Nav.Link href="/history/scale/Scale">History</Nav.Link>
                             <Nav.Link href="/sensors">Sensors</Nav.Link>
                         </Nav>
                         <Logout />
