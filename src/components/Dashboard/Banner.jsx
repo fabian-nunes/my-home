@@ -15,7 +15,7 @@ const Banner = ({token}) => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    document.getElementById("user").innerHTML = "Welcome " + data.username;
+                    document.getElementById("user").innerHTML = "Welcome " + data.name;
                 })
                 .catch((error) => {
                     console.error('Error fetching sensor data:', error);

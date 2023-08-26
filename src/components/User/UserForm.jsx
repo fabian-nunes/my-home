@@ -102,11 +102,11 @@ const UserForm = ({token}) => {
                         </Form.Group>
                         <Form.Group id="password">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" name="password" required />
+                            <Form.Control type="password" name="password" />
                         </Form.Group>
                         <Form.Group id="cpassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" name="password_confirm" required />
+                            <Form.Label>Password Confirm</Form.Label>
+                            <Form.Control type="password" name="password_confirm" />
                         </Form.Group>
                         <Button
                             className="w-100 mt-4 mb-4"
