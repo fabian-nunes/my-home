@@ -9,6 +9,8 @@ import DashHistory from './components/History/DashHistory';
 import DashSensors from "./components/Sensors/DashSensors";
 import DashUser from "./components/User/DashUser";
 import Confirm from "./components/Auth/Confirm";
+import Forgot from "./components/Auth/Forgot";
+import Reset from "./components/Auth/Reset";
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
 import { loginSuccess, loginFailure } from './redux/actions';
@@ -49,6 +51,8 @@ function App({ isLoggedIn, loginSuccess, loginFailure }) {
 
                     <Route path="/register" element={!isLoggedIn ? <Register /> : <Navigate to="/dashboard" />} />
 
+                    <Route path="/forgot" element={!isLoggedIn ? <Forgot /> : <Navigate to="/dashboard" />} />
+
                     {/* Route for the Dashboard (accessible after login) */}
                     <Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />} />
 
@@ -63,6 +67,8 @@ function App({ isLoggedIn, loginSuccess, loginFailure }) {
 
                     {/* Route for the Confirmation page */}
                     <Route path="/confirm/:token" element={!isLoggedIn ? <Confirm /> : <Navigate to="/dashboard" />} />
+
+                    <Route path="/reset/:token" element={!isLoggedIn ? <Reset /> : <Navigate to="/dashboard" />} />
 
                     {/* If the user is not logged in and tries to access any other page, redirect to the login page */}
                     <Route path="*" element={isLoggedIn ? <Navigate to="/dashboard" /> : <Navigate to="/login" />} />
