@@ -7,6 +7,7 @@ import LoginForm from './components/Auth/Login';
 import Register from './components/Auth/Register';
 import DashHistory from './components/History/DashHistory';
 import DashSensors from "./components/Sensors/DashSensors";
+import DashUser from "./components/User/DashUser";
 import Confirm from "./components/Auth/Confirm";
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
@@ -56,6 +57,9 @@ function App({ isLoggedIn, loginSuccess, loginFailure }) {
 
                     {/* Route for the Create Sensors (accessible after login) */}
                     <Route path="/sensors" element={isLoggedIn ? <DashSensors /> : <Navigate to="/login" />} />
+
+                    {/* Route for the User info (accessible after login) */}
+                    <Route path="/user" element={isLoggedIn ? <DashUser /> : <Navigate to="/login" />} />
 
                     {/* Route for the Confirmation page */}
                     <Route path="/confirm/:token" element={!isLoggedIn ? <Confirm /> : <Navigate to="/dashboard" />} />

@@ -22,6 +22,7 @@ function HNavbar() {
                             <Nav.Link href="/dashboard">Home</Nav.Link>
                             <Nav.Link href="/history/scale/Scale">History</Nav.Link>
                             <Nav.Link href="/sensors">Sensors</Nav.Link>
+                            <Nav.Link href="/user">User</Nav.Link>
                         </Nav>
                         <Logout />
                     </Navbar.Collapse>
