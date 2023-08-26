@@ -84,6 +84,8 @@ const LoginForm = ({ loginSuccess, loginFailure }) => {
                             <Form.Control type="password" name="password" required />
                         </Form.Group>
                         <Link to="/register" style={{fontSize: '13px'}}>Don't have an account? Register here.</Link>
+                        <br/>
+                        <Link to="/forgot-password" style={{fontSize: '13px'}}>Forgot password?</Link>
                         <Button
                             className="w-100 mt-4 mb-4"
                             type="submit"

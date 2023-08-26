@@ -34,7 +34,7 @@ const UserForm = ({token}) => {
             const form = document.getElementById('userForm'); // Add an ID to the form element
             if (form) {
                 // Assuming your API response format matches the field names
-                form.elements.username.value = userData.username;
+                form.elements.username.value = userData.name;
             }
         }
     }, [userData]);

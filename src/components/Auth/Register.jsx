@@ -82,7 +82,7 @@ const Register = () => {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" name="password_confirm" required />
                         </Form.Group>
-                        <Link to="/register" style={{fontSize: '13px'}}>Don't have an account? Register here.</Link>
+                        <Link to="/login" style={{fontSize: '13px'}}>Already have an account? Login</Link>
                         <Button
                             className="w-100 mt-4 mb-4"
                             type="submit"
