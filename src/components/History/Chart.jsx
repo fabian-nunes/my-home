@@ -25,6 +25,7 @@ ChartJS.register(
 
 const Chart = ({Stype, Sname, token}) => {
 
+    const [dataS, setDataS] = useState([]);
     const options = {
         responsive: true,
         plugins: {
@@ -70,13 +71,11 @@ const Chart = ({Stype, Sname, token}) => {
 
              if (response.status !== 200) {
                  console.log('Error: ' + response.status);
-                    setChartData({
-                        labels: [],
-                        datasets: [],
-                    });
+                    //destroy the chart
                  return;
              }
              const data = await response.json();
+             setDataS(data);
              const labels = data.map(item => {
                  const date = new Date(item.createdAt);
                     return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
@@ -101,7 +100,7 @@ const Chart = ({Stype, Sname, token}) => {
 
     return (
         <>
-            {chartData?.labels?.length === 0 ? (
+            {dataS?.length === 0 ? (
                 <p></p>
             ) : (
                 <>
