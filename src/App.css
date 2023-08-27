@@ -63,3 +63,18 @@
   color: #fff;
   text-decoration: none;
 }
+
+.chartCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 1000px;
+    height: 100%;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #eee;
+    position: relative;
+    z-index: 1;
+}
