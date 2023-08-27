@@ -87,13 +87,13 @@ const HistoryTable = ({ Stype, Sname, token }) => {
                                     //if stype is scale, show all values
                                     Stype === 'sensor' ? (
                                         <tr key={index}>
-                                            <td>{index + 1}</td>
+                                            <td>{startIndex + index + 1}</td>
                                             <td>{item.value}</td>
                                             <td>{item.createdAt}</td>
                                         </tr>
                                     ) : (
                                         <tr key={index}>
-                                            <td>{index + 1}</td>
+                                            <td>{startIndex + index + 1}</td>
                                             <td>{item.weight}</td>
                                             <td>{item.bmi}</td>
                                             <td>{item.fat}</td>
