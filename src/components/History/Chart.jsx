@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 import { Line } from 'react-chartjs-2';
 import {connect} from "react-redux";
+import 'chartjs-adapter-moment';
 
 const Chart = ({Stype, Sname, token}) => {
     const [chartData, setChartData] = useState({
         labels: [],
         datasets: [
             {
-                label: 'API Data',
+                label: 'Sensor Data',
                 data: [],
                 borderColor: 'rgba(75,192,192,1)',
                 backgroundColor: 'rgba(75,192,192,0.2)',
