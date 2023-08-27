@@ -28,8 +28,8 @@ const HistoryTable = ({ Stype, Sname, token }) => {
             .then((response) => {
                 if (response.status !== 200) {
                     console.log('Error: ' + response.status);
-                    setHistory([]); // Set history to an empty array in case of conflict
-                    setTotalPages(0); // Reset the total pages
+                    setHistory([{value: 0, createdAt: Date.now()}]); // Set history to an empty array in case of conflict
+                    setTotalPages(1); // Reset the total pages
                     return;
                 }
                 return response.json();
