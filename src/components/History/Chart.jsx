@@ -70,6 +70,10 @@ const Chart = ({Stype, Sname, token}) => {
 
              if (response.status !== 200) {
                  console.log('Error: ' + response.status);
+                    setChartData({
+                        labels: [],
+                        datasets: [],
+                    });
                  return;
              }
              const data = await response.json();
