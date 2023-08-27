@@ -14,7 +14,7 @@ const Links = ({Sname, sensors}) => {
                             { sensor.name === Sname ? (
                                 <p>{sensor.name}</p>
                             ) : (
-                                <Link to={"/history/"+(sensor.name === "scale" ? "scale" : "sensor")+"/" + sensor.name}>{sensor.name}</Link>
+                                <Link to={"/history/"+(sensor.name === "Scale" ? "scale" : "sensor")+"/" + sensor.name}>{sensor.name}</Link>
                             )}
                         </Col>
                     ))}
