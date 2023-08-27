@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Card, Table } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import ReactPaginate from "react-paginate";
 
 const HistoryTable = ({ Stype, Sname, token }) => {
     const [history, setHistory] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(0);
+    const itemsPerPage = 10
 
     useEffect(() => {
         fetchData();
@@ -29,11 +33,20 @@ const HistoryTable = ({ Stype, Sname, token }) => {
                 return response.json();
             })
             .then((data) => {
+                setTotalPages(Math.ceil(data.length / itemsPerPage));
                 setHistory(data);
             })
             .catch((err) => {
                 console.log(err);
             });
+    };
+
+    const startIndex = currentPage * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const subset = history.slice(startIndex, endIndex);
+
+    const handlePageChange = (selectedPage) => {
+        setCurrentPage(selectedPage.selected);
     };
 
     return (
@@ -101,6 +114,11 @@ const HistoryTable = ({ Stype, Sname, token }) => {
                         )}
                     </Card.Body>
                 </Card>
+                <ReactPaginate
+                    pageCount={totalPages}
+                    onPageChange={handlePageChange}
+                    forcePage={currentPage}
+                />
             </Container>
         </>
     );

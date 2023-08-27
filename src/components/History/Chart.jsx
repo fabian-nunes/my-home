@@ -33,7 +33,7 @@ const Chart = ({Stype, Sname, token}) => {
             },
             title: {
                 display: true,
-                text: 'Chart.js Line Chart',
+                text: 'Sensor Data Evolution',
             },
         },
     };
