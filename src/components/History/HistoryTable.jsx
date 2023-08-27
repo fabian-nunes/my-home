@@ -33,8 +33,8 @@ const HistoryTable = ({ Stype, Sname, token }) => {
                 return response.json();
             })
             .then((data) => {
-                setTotalPages(Math.ceil(data.length / itemsPerPage));
                 setHistory(data);
+                setTotalPages(Math.ceil(data.length / itemsPerPage));
             })
             .catch((err) => {
                 console.log(err);
@@ -82,7 +82,7 @@ const HistoryTable = ({ Stype, Sname, token }) => {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {history?.map((item, index) => (
+                                {subset?.map((item, index) => (
                                     //if stype is sensor, only show value
                                     //if stype is scale, show all values
                                     Stype === 'sensor' ? (
