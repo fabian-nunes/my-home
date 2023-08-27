@@ -1,8 +1,27 @@
 import React, { useState, useEffect } from 'react';
-
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import {connect} from "react-redux";
 import 'chartjs-adapter-moment';
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
 
 const Chart = ({Stype, Sname, token}) => {
     const [chartData, setChartData] = useState({
@@ -70,10 +89,7 @@ const Chart = ({Stype, Sname, token}) => {
                 options={{
                     scales: {
                         x: {
-                            type: 'time',
-                            time: {
-                                unit: 'minute', // Adjust based on your data granularity
-                            },
+                            type: 'time'
                         },
                         y: {
                             // Add options for the y-axis if needed
