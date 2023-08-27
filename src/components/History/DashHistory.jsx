@@ -11,7 +11,7 @@ const DashHistory = () => {
     return (
         <>
             <DNav />
-            <Links Sname={name} Stype={type} />
+            <Links Sname={name} />
             <HistoryTable Sname={name} Stype={type} />
             <Chart Sname={name} Stype={type} />
         </>
