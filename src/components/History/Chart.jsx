@@ -24,6 +24,20 @@ ChartJS.register(
 );
 
 const Chart = ({Stype, Sname, token}) => {
+
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Chart.js Line Chart',
+            },
+        },
+    };
+
     const [chartData, setChartData] = useState({
         labels: [],
         datasets: [
@@ -86,16 +100,7 @@ const Chart = ({Stype, Sname, token}) => {
             <h2>Chart</h2>
             <Line
                 data={chartData}
-                options={{
-                    scales: {
-                        x: {
-                            type: 'time'
-                        },
-                        y: {
-                            // Add options for the y-axis if needed
-                        },
-                    },
-                }}
+                options={options}
             />
         </>
     );
