@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Card, Table } from 'react-bootstrap';
+import { Container, Card, Table, Pagination } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import ReactPaginate from "react-paginate";
 
@@ -114,11 +114,25 @@ const HistoryTable = ({ Stype, Sname, token }) => {
                         )}
                     </Card.Body>
                 </Card>
-                <ReactPaginate
-                    pageCount={totalPages}
-                    onPageChange={handlePageChange}
-                    forcePage={currentPage}
-                />
+                <Pagination className="justify-content-center mt-3"> {/* Apply Bootstrap's pagination styles */}
+                    <ReactPaginate
+                        pageCount={totalPages}
+                        onPageChange={handlePageChange}
+                        forcePage={currentPage}
+                        previousLabel="Previous"
+                        nextLabel="Next"
+                        breakLabel="..."
+                        breakClassName="page-item"
+                        breakLinkClassName="page-link"
+                        containerClassName="pagination"
+                        pageClassName="page-item"
+                        pageLinkClassName="page-link"
+                        previousClassName="page-item"
+                        previousLinkClassName="page-link"
+                        nextClassName="page-item"
+                        nextLinkClassName="page-link"
+                    />
+                </Pagination>
             </Container>
         </>
     );
