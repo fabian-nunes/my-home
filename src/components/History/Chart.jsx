@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import { Line } from 'react-chartjs-2';
 import {connect} from "react-redux";
 
@@ -63,7 +64,22 @@ const Chart = ({Stype, Sname, token}) => {
     return (
         <>
             <h2>Chart</h2>
-            <Line data={chartData} />
+            <Line
+                data={chartData}
+                options={{
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'minute', // Adjust based on your data granularity
+                            },
+                        },
+                        y: {
+                            // Add options for the y-axis if needed
+                        },
+                    },
+                }}
+            />
         </>
     );
 }
