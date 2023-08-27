@@ -3,8 +3,7 @@ import {Link} from "react-router-dom";
 import React from 'react';
 import { connect } from 'react-redux';
 
-const Links = ({Sname, sensors}) => {
-    const type = Sname === 'Scale' ? 'scale' : 'sensor';
+const Links = ({Sname, Stype, sensors}) => {
     return (
         <>
             <Container className="mt-5 mb-5">
@@ -15,7 +14,7 @@ const Links = ({Sname, sensors}) => {
                             { sensor.name === Sname ? (
                                 <p>{sensor.name}</p>
                             ) : (
-                                <Link to={"/history/"+type+"/" + sensor.name}>{sensor.name}</Link>
+                                <Link to={"/history/"+Stype+"/" + sensor.name}>{sensor.name}</Link>
                             )}
                         </Col>
                     ))}
