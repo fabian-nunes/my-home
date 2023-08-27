@@ -98,7 +98,7 @@ const Chart = ({Stype, Sname, token}) => {
     return (
         <>
             <h2>Chart</h2>
-            <Line
+            <Line style={{position: 'relative', height: '400px', width: '600px'}}
                 data={chartData}
                 options={options}
             />
