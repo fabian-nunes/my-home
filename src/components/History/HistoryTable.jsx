@@ -59,7 +59,7 @@ const HistoryTable = ({ Stype, Sname, token }) => {
                 <Card>
                     <Card.Body>
                         {history?.length === 0 ? (
-                            <p>Loading...</p>
+                            <p>No Data</p>
                         ) : (
                             <Table striped bordered hover>
                                 <thead>

@@ -97,10 +97,16 @@ const Chart = ({Stype, Sname, token}) => {
 
     return (
         <>
-            <h2>Chart</h2>
-            <div className="chartCenter">
-                <Line data={chartData} options={options}/>
-            </div>
+            {chartData?.labels?.length === 0 ? (
+                <p></p>
+            ) : (
+                <>
+                    <h2>Chart</h2>
+                    <div className="chartCenter">
+                        <Line data={chartData} options={options}/>
+                    </div>
+                </>
+            )}
         </>
     );
 }
